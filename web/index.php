@@ -1,41 +1,18 @@
 <?php
 namespace ueb05\web;
 
+require_once("model.php");
 
-
-class Run{
-  private $Date;
-  private $Distance
-  private $Time
-
-  public function __construct($Date, $Distance, $Time){
-    $this->Date = $Date;
-    $this->Distance = Distance;
-    $this->Time = $Time;
-  }
-
-  public function __get($property) {
-    if (property_exists($this, $property)) {
-      return $this->$property;
-    }
-    else {
-      return false;
-    }
-  }
-
-  public function __set($property, $value) {
-    if (property_exists($this, $property)) {
-      $this->$property = $value;
-    }
-    else {
-      return false;
-    }
-  }
-
-
-
-
-
-
-}
- ?>
+$page = isset($_GET["page"]) ? $_GET["page"] : "welcome";
+$pc = getPage($page);
+?>
+<html lang="de">
+<?php include "head.html"?>
+<body>
+<?php include "nav.html"; ?>
+<main role="main" class="container">
+    <?php include $pc;?>
+</main>
+<?php include "footer.html"?>
+</body>
+</html>
