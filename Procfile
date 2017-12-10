@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 -C apache.conf web/
+app: bin/heroku-php-apache2 -C conf/apache2/default_include.conf app/
