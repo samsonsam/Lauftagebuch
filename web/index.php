@@ -1,18 +1,14 @@
 <?php
 namespace ueb05\web;
 
-require_once("model.php");
+use Twig_Environment;
+use Twig_Loader_Array;
 
-$page = isset($_GET["page"]) ? $_GET["page"] : "welcome";
-$pc = getPage($page);
-?>
-<html lang="de">
-<?php include "head.html"?>
-<body>
-<?php include "nav.html"; ?>
-<main role="main" class="container">
-    <?php include $pc;?>
-</main>
-<?php include "footer.html"?>
-</body>
-</html>
+require_once(__DIR__ . '/twig.php');
+
+echo $twig->render('welcome.php.twig', array(
+    'pagetitle' => 'Startseite'
+));
+
+
+
