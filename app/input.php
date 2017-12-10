@@ -14,10 +14,12 @@ require_once(__DIR__.'/src/model.php');
 if ($_POST) {
     try {
         $data = new Run($_POST["date"], $_POST["distance"], $_POST["time"]);
-        addRunData($data);
+
     } catch (\UnexpectedValueException $exception) {
-        //echo $exception;
-        echo "<b style='color: red'>Leck mich im Arsch. Bist du Kacke im Kopf oder was?</b>";
+        //echo "<b style='color: red'>$exception</b>";
+    }
+    if (isset($data)) {
+        addRunData($data);
     }
 }
 
