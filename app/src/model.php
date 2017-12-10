@@ -137,12 +137,16 @@ function getOverviewData()
         $prev_run = $elem["Date"];
     }
 
-    $total_h = round($hh + $mm / 1440 + $ss / 86400, 2, PHP_ROUND_HALF_UP);
-    $difference_in_seconds = $start_time - $end_time;
+    $total_h = round($hh + $mm / 60 + $ss / 3600, 2, PHP_ROUND_HALF_UP);
+    if (isset($start_time)) {
+        $difference_in_seconds = $start_time - $end_time;
+    } else {
+        $difference_in_seconds = 86400;
+    }
+
     $activity_span = $difference_in_seconds / 60 / 60 / 24;
 
     return array(
-        'pagetitle' => 'Überblick - SuperRun',
         'total_activity' => $total_activity,
         'activity_span' => $activity_span,
         'total_km' => $total_km,

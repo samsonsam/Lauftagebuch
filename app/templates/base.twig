@@ -29,6 +29,7 @@
 
         .white {
             color: white;
+            text-shadow: 1px 1px 5px black;
         }
 
         /* Sticky footer styles
@@ -53,6 +54,8 @@
             border: 5px solid lightgray;
             background-color: lightgray;
         }
+
+
 
     </style>
 </head>
@@ -81,7 +84,7 @@
         </div>
     </nav>
 {% endblock %}
-<div id="content">
+<div class="container content-center">
     {% block body %} {% endblock %}
 </div>
 {% block footer %}

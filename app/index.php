@@ -9,7 +9,3 @@ require_once(__DIR__ . '/twig.php');
 echo $twig->render('welcome.php.twig', array(
     'pagetitle' => 'Startseite'
 ));
-
-
-
-getenv()
