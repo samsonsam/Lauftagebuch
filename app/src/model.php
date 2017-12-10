@@ -104,54 +104,63 @@ function getOverviewData()
     global $JSON_uri;
 
     $data = readJSON($JSON_uri);
-    $total_activity = 0;
-    $total_km = 0;
-    $start_time = null;
-    $end_time = null;
-    //$i = 0;
-    $hh = 0;
-    $mm = 0;
-    $ss = 0;
-    $prev_run = null;
+    if (count($data) != 0) {
+        $total_activity = 0;
+        $total_km = 0;
+        $start_time = null;
+        $end_time = null;
+        //$i = 0;
+        $hh = 0;
+        $mm = 0;
+        $ss = 0;
+        $prev_run = null;
 
-    foreach ($data as $elem) {
-        global $total_activity, $activity_span, $total_km, $total_h, $start_time, $end_time, $i, $hh, $mm, $ss, $prev_run;
+        foreach ($data as $elem) {
+            global $total_activity, $activity_span, $total_km, $total_h, $start_time, $end_time, $i, $hh, $mm, $ss, $prev_run;
 
-        if ($i == 0) {
-            $end_time = $elem["Date"];
-        } elseif (count($data) == $i + 1) {
-            $start_time = $elem["Date"];
+            if ($i == 0) {
+                $end_time = $elem["Date"];
+            } elseif (count($data) == $i + 1) {
+                $start_time = $elem["Date"];
+            }
+
+            if ($prev_run and $prev_run != $elem["Date"]) {
+                $total_activity = $i + 1;
+            } elseif (!$prev_run) {
+                $total_activity = $i + 1;
+            }
+            $total_km += $elem["Distance"];
+            $time = explode(':', $elem["Time"]);
+            $hh += $time[0];
+            $mm += $time[1];
+            $ss += $time[2];
+            $i++;
+            $prev_run = $elem["Date"];
         }
 
-        if ($prev_run and $prev_run != $elem["Date"]) {
-            $total_activity = $i + 1;
-        } elseif (!$prev_run) {
-            $total_activity = $i + 1;
+        $total_h = round($hh + $mm / 60 + $ss / 3600, 2, PHP_ROUND_HALF_UP);
+        if (isset($start_time)) {
+            $difference_in_seconds = $start_time - $end_time;
+        } else {
+            $difference_in_seconds = 86400;
         }
-        $total_km += $elem["Distance"];
-        $time = explode(':', $elem["Time"]);
-        $hh += $time[0];
-        $mm += $time[1];
-        $ss += $time[2];
-        $i++;
-        $prev_run = $elem["Date"];
-    }
 
-    $total_h = round($hh + $mm / 60 + $ss / 3600, 2, PHP_ROUND_HALF_UP);
-    if (isset($start_time)) {
-        $difference_in_seconds = $start_time - $end_time;
+        $activity_span = $difference_in_seconds / 60 / 60 / 24;
+
+        return array(
+            'total_activity' => $total_activity,
+            'activity_span' => $activity_span,
+            'total_km' => $total_km,
+            'total_h' => $total_h
+        );
     } else {
-        $difference_in_seconds = 86400;
+        return array(
+            'total_activity' => 0,
+            'activity_span' => 0,
+            'total_km' => 0,
+            'total_h' => 0
+        );
     }
-
-    $activity_span = $difference_in_seconds / 60 / 60 / 24;
-
-    return array(
-        'total_activity' => $total_activity,
-        'activity_span' => $activity_span,
-        'total_km' => $total_km,
-        'total_h' => $total_h
-    );
 
 }
 
