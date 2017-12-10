@@ -1,0 +1,10 @@
+{% extends 'base.twig' %}
+{% block body %}
+<div class="jumbotron" style="background-image: url('../img/1273687.jpg'); background-position: center right">
+    <h2 class="white">Sie sind ...</h2>
+    <br>
+    <p class="white">an insgesamt <strong>{{ data.total_activity }}</strong> Tagen gelaufen</p>
+    <p class="white">im Zeitraum von <strong>{{ data.activity_span }}</strong> Tagen</p>
+    <p class="white">Das sind insgesamt <strong>{{ data.total_km }}</strong> Kilometer innerhalb von <strong>{{ data.total_h }}</strong> Stunden</p>
+</div>
+{% endblock %}

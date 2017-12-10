@@ -1,0 +1,53 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+    <html>
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>Detailansicht</h2>
+            <br>
+            <table class="table">
+                <thead>
+                <tr>
+                    {# <th scope="col">#</th> #}
+                    <th scope="col">Datum</th>
+                    <th scope="col">Strecke</th>
+                    <th scope="col">Zeit</th>
+                    <th scope="col">Ø-Speed</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if runs %}
+                    {% for run in runs %}
+                        <tr id={{ run['id'] }}>
+                            {# <th scope='row'>$index</th> #}
+                            <td>{{ run['date'] }}</td>
+                            <td>{{ run['distance'] }} km</td>
+                            <td>{{ run['time'] }} h</td>
+                            <td>{{ run['average'] }} km/h</td>
+                            <td><i id='trash-{{ run['id'] }}' class="fa fa-trash" aria-hidden="true"></i></td>
+                            <script type="text/javascript">
+                                $("#trash-{{ run['id'] }}").click(function () {
+                                    document.getElementById('{{ run['id'] }}').parentNode.removeChild(document.getElementById('{{ run['id'] }}'));
+                                    $.post("./../src/delete.php",
+                                        {
+                                            job: "delete",
+                                            id: {{ run['id'] }}
+                                        },
+                                        function (data, status) {
+                                            console.log("Data: " + data + "\nStatus: " + status);
+                                        });
+                                });
+                            </script>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <td>Noch keine Einträge vorhanden.</td>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </html>
+{% endblock %}

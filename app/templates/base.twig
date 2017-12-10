@@ -1,0 +1,99 @@
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="SuperRun - Das Lauftagebuch">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ pagetitle }}</title>
+    <!-- Verweis auf externe Ressourcen -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../font-awesome-4.7-2.0/css/font-awesome.min.css">
+    <style>
+        html {
+            background-color: black;
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+
+        .white {
+            color: white;
+        }
+
+        /* Sticky footer styles
+    -------------------------------------------------- */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            line-height: 60px; /* Vertically center the text there */
+            background-color: #f5f5f5;
+            /*height: 140px;*/
+        }
+        .fa-trash {
+            display: inline-flex;
+            margin: 5px;
+        }
+        .fa-trash:hover {
+            margin: 0px;
+            border-radius: 100%;
+            border: 5px solid lightgray;
+            background-color: lightgray;
+        }
+
+    </style>
+</head>
+<body>
+{% block navbar %}
+    <nav class="navbar navbar-toggleable-md bg-faded navbar-light">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="index.php"><b style="color: darkred;">SuperRun</b></a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if pagetitle == 'Überblick' %} active {% endif %}" href="overview.php">Übersicht</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if pagetitle == 'Detailansicht' %} active {% endif %}" href="detail_view.php">Detailansicht</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if pagetitle == 'Neuer Eintrag' %} active {% endif %}" href="input.php">Neuer Eintrag</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+<div id="content">
+    {% block body %} {% endblock %}
+</div>
+{% block footer %}
+    <footer class="footer text-center">
+        <div class="container">
+        <span class="text-muted">
+            <a href="./../404.php">Impressum</a>
+            <a href="./../404.php">FAQ</a>
+            <p>© s0556350</p>
+        </span>
+        </div>
+    </footer>
+{% endblock %}
+</body>
+</html>
