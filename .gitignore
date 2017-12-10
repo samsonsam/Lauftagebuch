@@ -52,3 +52,4 @@ fabric.properties
 #
 .DS_Store
 /vendor/
+/app/src/data.json
