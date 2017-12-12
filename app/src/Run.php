@@ -40,11 +40,6 @@ class Run
             $this->Distance = $Distance;
         }
 
-
-        echo '<script language="javascript">';
-        echo 'alert('.$Time.')';
-        echo '</script>';
-
         if (!isset($Time)) {
             echo '<script language="javascript">';
             echo 'alert("Überprüfen Sie ihre Zeitangabe!")';

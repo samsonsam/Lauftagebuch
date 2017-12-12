@@ -14,7 +14,6 @@ $path = $_SERVER["SCRIPT_FILENAME"];
 file_put_contents("php://stdout", "\nRequested: $path");
 
 
-
 if (isset($_POST['job']) and $_POST['job'] == 'delete') {
     \ueb05\web\deleteRunData(intval($_POST['id']));
 }

@@ -1,11 +1,9 @@
 <?php
-namespace ueb05\web;
 
-use Twig_Environment;
-use Twig_Loader_Array;
+namespace ueb05\web;
 
 require_once(__DIR__ . '/twig.php');
 
-echo $twig->render('welcome.php.twig', array(
+echo $twig->render('welcome.twig', array(
     'pagetitle' => 'Startseite'
 ));

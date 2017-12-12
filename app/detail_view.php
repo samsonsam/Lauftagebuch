@@ -12,7 +12,7 @@ use function ueb05\web\getDetailData;
 require_once(__DIR__ . '/twig.php');
 
 
-echo $twig->render('detail_view.html.twig',array(
+echo $twig->render('detail_view.twig', array(
     'pagetitle' => 'Detailansicht',
     'runs' => getDetailData()
 ));

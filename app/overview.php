@@ -11,7 +11,7 @@ use function ueb05\web\getOverviewData;
 require_once 'twig.php';
 
 
-echo $twig->render('overview.php.twig',array(
+echo $twig->render('overview.twig', array(
     'pagetitle' => 'Überblick',
     'data' => getOverviewData()
 
