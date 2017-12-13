@@ -20,8 +20,10 @@ class Run
             echo '</script>';
             throw new UnexpectedValueException('$Date was not set!');
         } else {
-            if ($this->Date = strtotime($Date) == -1) {
+            if (strtotime($Date) == -1) {
                 throw new UnexpectedValueException('$Date was formatted wrong!');
+            }else {
+                $this->Date = strtotime($Date);
             }
         }
 
@@ -31,7 +33,7 @@ class Run
             echo 'alert("Überprüfen Sie ihre Distanz!")';
             echo '</script>';
             throw new UnexpectedValueException('$Distance was not set!');
-        } elseif ($Distance == 0) {
+        } elseif ($Distance <= 0) {
             echo '<script language="javascript">';
             echo 'alert("Überprüfen Sie ihre Distanz!")';
             echo '</script>';
@@ -54,7 +56,7 @@ class Run
                 throw new UnexpectedValueException('$Time was formatted wrong!');
             } elseif ($temp == 3) {
                 $temp = explode(':', $Time);
-                if (is_numeric($temp[0]) and is_numeric($temp[1]) and is_numeric($temp[2])) {
+                if (is_numeric($temp[0]) and is_numeric($temp[1]) and is_numeric($temp[2]) and $temp[0] <= 60 and $temp[1] <= 60 and $temp[2] <= 60) {
                     $this->Time = $Time;
                 } else {
                     echo '<script language="javascript">';

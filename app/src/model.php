@@ -50,26 +50,29 @@ function addRunData(\Run $data)
     /**
      * @param string $sortON
      * <p>
-     * This function sorts the json file after adding a new
+     * This function sorts the json file after adding a new /Run object
      * </p>
      */
     $sortON = 'Date';
 
     $arr = readJSON($JSON_uri);
+    if (count($arr) != 0) {
+        foreach ($arr as $key => $element) {
+            if ($element['Date'] == $data->Date) {
+                unset($arr[$key]);
+                print '<script>alert("Es bestand bereits ein Eintrag an diesem Tag. Dieser wurde mit dem soeben ersteltem Eintrag ersetzt.")</script>';
+            }
+        }
+    }
     $arr[] = $data;
     $arr = array_sort($arr, $sortON, SORT_ASC);
     writeJSON($JSON_uri, $arr);
-    //writeJSON($JSON_uri, array_sort((readJSON($JSON_uri)[] = $data), $sortON, SORT_ASC));
 }
 
 
 function deleteRunData(int $id)
 {
     global $JSON_uri;
-
-    $path = $_SERVER["SCRIPT_FILENAME"];
-
-    file_put_contents("php://stdout", "\nRequested: $path");
 
     $arr = readJSON($JSON_uri);
 
