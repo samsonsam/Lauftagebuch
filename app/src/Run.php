@@ -56,7 +56,7 @@ class Run
                 throw new UnexpectedValueException('$Time was formatted wrong!');
             } elseif ($temp == 3) {
                 $temp = explode(':', $Time);
-                if (is_numeric($temp[0]) and is_numeric($temp[1]) and is_numeric($temp[2]) and $temp[0] <= 60 and $temp[1] <= 60 and $temp[2] <= 60) {
+                if (is_numeric($temp[0]) and is_numeric($temp[1]) and is_numeric($temp[2]) and $temp[0] <= 99 and $temp[1] <= 59 and $temp[2] <= 59) {
                     $this->Time = $Time;
                 } else {
                     echo '<script language="javascript">';
