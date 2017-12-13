@@ -149,7 +149,7 @@ function getOverviewData()
         }
 
         $total_h = round($hh + $mm / 60 + $ss / 3600, 2, PHP_ROUND_HALF_UP);
-        if (isset($start_time)) {
+        if (isset($end_time)) {
             $difference_in_seconds = $start_time - $end_time;
         } else {
             $difference_in_seconds = 86400;
