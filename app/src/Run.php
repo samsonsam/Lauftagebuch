@@ -14,17 +14,21 @@ class Run
 
     function __construct($Date, $Distance, $Time)
     {
+        $now = new DateTime();
         if (!isset($Date)) {
             echo '<script language="javascript">';
             echo 'alert("Überprüfen Sie ihr Datum!")';
             echo '</script>';
             throw new UnexpectedValueException('$Date was not set!');
+        } elseif (strtotime($Date) == -1) {
+            throw new UnexpectedValueException('$Date was formatted wrong!');
+        } elseif (strtotime($Date) > $now->getTimestamp()){
+            echo '<script language="javascript">';
+            echo 'alert("Datum kann nicht in der Zukunft sein!")';
+            echo '</script>';
+            throw new UnexpectedValueException('$Date was invalid!');
         } else {
-            if (strtotime($Date) == -1) {
-                throw new UnexpectedValueException('$Date was formatted wrong!');
-            }else {
-                $this->Date = strtotime($Date);
-            }
+            $this->Date = strtotime($Date);
         }
 
 
