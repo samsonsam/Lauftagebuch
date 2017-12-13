@@ -65,7 +65,7 @@ function addRunData(\Run $data)
         }
     }
     $arr[] = $data;
-    $arr = array_sort($arr, $sortON, SORT_ASC);
+    $arr = array_sort($arr, $sortON, SORT_DESC);
     writeJSON($JSON_uri, $arr);
 }
 
@@ -73,13 +73,20 @@ function addRunData(\Run $data)
 function deleteRunData(int $id)
 {
     global $JSON_uri;
+    print '<script>alert("1")</script>';
 
     $arr = readJSON($JSON_uri);
 
+    print '<script>alert("2")</script>';
+
     if (isset($arr[$id])) {
+        print '<script>alert("3")</script>';
         unset($arr[$id]);
+        print '<script>alert("4")</script>';
     }
+    print '<script>alert("5")</script>';
     writeJSON($JSON_uri, $arr);
+    print '<script>alert("6")</script>';
 }
 
 function getDetailData()
@@ -122,9 +129,9 @@ function getOverviewData()
             global $total_activity, $activity_span, $total_km, $total_h, $start_time, $end_time, $i, $hh, $mm, $ss, $prev_run;
 
             if ($i == 0) {
-                $end_time = $elem["Date"];
-            } elseif (count($data) == $i + 1) {
                 $start_time = $elem["Date"];
+            } elseif (count($data) == $i + 1) {
+                $end_time = $elem["Date"];
             }
 
             if ($prev_run and $prev_run != $elem["Date"]) {
@@ -180,10 +187,12 @@ function readJSON(string $uri = __DIR__ . '/data.json')
 }
 
 /**
- * @return int|bool The function returns the number of bytes that were written to the file, or
+ * @param string $uri
+ * @param $data
+ * @return bool|int The function returns the number of bytes that were written to the file, or
  * false on failure.
- **/
-function writeJSON(string $uri, $data)
+ */
+function writeJSON(string $uri = __DIR__ . '/data.json', $data)
 {
     return file_put_contents($uri, json_encode($data));
 }
